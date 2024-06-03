@@ -1,20 +1,16 @@
-export default class Building {
-  constructor(sqft) {
-    this.sqft = sqft;
-    if (this.constructor !== Building) {
-      if (typeof this.evacuationWarningMessage !== 'function') {
-        throw new Error(
-          'Class extending Building must override evacuationWarningMessage',
-        );
-      }
-    }
+/**
+ * Creates a buffer array with a given position set to a given value.
+ * @param {Number} length - The length of the buffer.
+ * @param {Number} position - The position to modify.
+ * @param {Number} value - The value to be stored in the position.
+ * @author Zanele Nemaphohoni  <https://github.com/ZaneleNe>
+ * @returns {DataView}
+ */
+export default function createInt8TypedArray(length, position, value) {
+  if (position >= length) {
+    throw new Error('Position outside range');
   }
-
-  get sqft() {
-    return this._sqft;
-  }
-
-  set sqft(value) {
-    this._sqft = value;
-  }
+  const buf = new DataView(new ArrayBuffer(length), 0, length);
+  buf.setInt8(position, value);
+  return buf;
 }

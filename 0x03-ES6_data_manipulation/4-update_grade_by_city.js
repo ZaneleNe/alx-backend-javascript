@@ -1,50 +1,32 @@
-iimport Currency from './3-currency';
+/**
+ * Updates the grades of a list of students in a given city.
+ * @param {{
+ *   id: Number,
+ *   firstName: String,
+ *   location: String
+ * }[]} students - The list of students.
+ * @param {*} city - The city of students.
+ * @param {{
+ *   studentId: Number,
+ *   grade: Number,
+ * }[]} newGrades - The new grades to be given to a student.
+ * @author Abdulkadir Badamasi <https://github.com/abmahuta>
+ * @returns {{id: Number, firstName: String, location: String}[]}
+ */
+export default function updateStudentGradeByCity(students, city, newGrades) {
+  const defaultGrade = { grade: 'N/A' };
 
-export default class Pricing {
-  constructor(amount, currency) {
-    this.amount = amount;
-    this.currency = currency;
+  if (students instanceof Array) {
+    return students
+      .filter((student) => student.location === city)
+      .map((student) => ({
+        id: student.id,
+        firstName: student.firstName,
+        location: student.location,
+        grade: (newGrades
+          .filter((grade) => grade.studentId === student.id)
+          .pop() || defaultGrade).grade,
+      }));
   }
-
-  get amount() {
-    return this._amount;
-  }
-
-  set amount(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
-    this._amount = value;
-  }
-
-  /**
-   * @returns {Currency}
-   */
-  get currency() {
-    return this._currency;
-  }
-
-  /**
-   * @param {Currency} value
-   */
-  set currency(value) {
-    if (!(value instanceof Currency)) {
-      throw new TypeError('currency must be a Currency');
-    }
-    this._currency = value;
-  }
-
-  displayFullPrice() {
-    return `${this.amount} ${this.currency.name} (${this.currency.code})`;
-  }
-
-  static convertPrice(amount, conversionRate) {
-    if (typeof amount !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
-    if (typeof conversionRate !== 'number') {
-      throw new TypeError('conversionRate must be a number');
-    }
-    return amount * conversionRate;
-  }
+  return [];
 }

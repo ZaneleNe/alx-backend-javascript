@@ -1,22 +1,27 @@
-import Car from './10-car';
+/**
+ * Exports a  weak map of endpoints and returns the number of calls made.
+ */
+export const weakMap = new WeakMap();
 
-export default class EVCar extends Car {
-  constructor(brand, motor, color, range) {
-    super(brand, motor, color);
-    this.range = range;
+/**
+ * The maximum number of calls for an endpoint.
+ */
+const MAX_ENDPOINT_CALLS = 5;
+
+/**
+ * Tracks the number of calls made to an API's endpoint.
+ * @param {{
+ *   protocol: String,
+ *   name: String,
+ * }} endpoint - The endpoint to make a request to.
+ * @author Abdulkadir Badamasi <https://github.com/abmahuta>
+ */
+export function queryAPI(endpoint) {
+  if (!weakMap.has(endpoint)) {
+    weakMap.set(endpoint, 0);
   }
-
-  get range() {
-    return this._range;
-  }
-
-  set range(value) {
-    this._range = value;
-  }
-
-  cloneCar() {
-    const Species = super.constructor[Symbol.species];
-
-    return new Species();
+  weakMap.set(endpoint, weakMap.get(endpoint) + 1);
+  if (weakMap.get(endpoint) >= MAX_ENDPOINT_CALLS) {
+    throw new Error('Endpoint load is high');
   }
 }

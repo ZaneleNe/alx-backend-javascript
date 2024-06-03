@@ -1,30 +1,19 @@
-export default class Currency {
-  constructor(code, name) {
-    this.code = code;
-    this.name = name;
+/**
+ * Returns the sum of ids of a list of students.
+ * @param {{
+ *   id: Number,
+ *   firstName: String,
+ *   location: String
+ * }[]} students - The list of students.
+ * @author Abdulkadir Badamasi <https://github.com/abmahuta>
+ * @returns {Number}
+ */
+export default function getStudentIdsSum(students) {
+  if (students instanceof Array) {
+    return students.reduce(
+      (prevStudent, curStudent) => prevStudent.id || prevStudent + curStudent.id,
+      0,
+    );
   }
-
-  get code() {
-    return this._code;
-  }
-
-  set code(value) {
-    this._code = value;
-  }
-
-  get name() {
-    return this._name;
-  }
-
-  set name(value) {
-    this._name = value;
-  }
-
-  /**
-   * Creates the full string representation of this Currency.
-   * @returns {String}
-   */
-  displayFullCurrency() {
-    return `${this.name} (${this.code})`;
-  }
+  return 0;
 }
