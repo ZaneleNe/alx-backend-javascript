@@ -1,0 +1,16 @@
+{
+  "name": "0x06-unittests_in_js",
+  "version": "1.0.0",
+  "description": "0x06. Unittests in JS UnitTests Back-end JavaScript ES6 NodeJS ExpressJS Mocha",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^10.7.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
