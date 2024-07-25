@@ -9,7 +9,7 @@ const DB_FILE = process.argv.length > 2 ? process.argv[2] : '';
 /**
  * Reads a CSV data file asynchronously.
  * @param {String} dataPath The path to the CSV data file.
- * @author Abdulkadir Badamasi <https://github.com/abmahuta>
+ * @author Zanele Nemaphohoni <https://github.com/zanelene>
  */
 const countStudents = (dataPath) => new Promise((resolve, reject) => {
   if (!dataPath) {
